@@ -37,6 +37,9 @@ ENV SSL_VERIFYING_DISABLE ${SSL_VERIFYING_DISABLE}
 
 COPY --from=builder /usr/src/app/target/fdns-ms-rules-*.jar /app.jar
 
+# pull latest
+RUN apk update && apk upgrade --no-cache
+
 # don't run as root user
 RUN chown 1001:0 /app.jar
 RUN chmod g+rwx /app.jar
