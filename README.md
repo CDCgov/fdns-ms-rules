@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/CDCgov/fdns-ms-rules.svg?branch=master)](https://travis-ci.org/CDCgov/fdns-ms-rules)
+
 # FDNS Business Rules Microservice
 This is the repository with the Business Rules Engine for ingesting and validating JSON files.
 
