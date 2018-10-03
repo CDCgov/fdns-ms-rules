@@ -1,10 +1,5 @@
 # build stage
 FROM maven:3-jdk-8 as builder
-
-ARG OBJECT_URL
-
-ENV OBJECT_URL ${OBJECT_URL}
-
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 WORKDIR /usr/src/app
