@@ -41,7 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { 
 		"logging.fluentd.host=fluentd", 
 		"logging.fluentd.port=24224", 
-		"proxy.hostname=localhost",
+		"proxy.hostname=",
 		"security.oauth2.resource.user-info-uri=",
 		"security.oauth2.protected=",
 		"security.oauth2.client.client-id=",
@@ -64,7 +64,7 @@ public class RulesApplicationTests {
 		JacksonTester.initFields(this, objectMapper);
 
 		// Define the object URL
-		System.setProperty("OBJECT_URL", "http://fdns-ms-object:8083");
+		System.setProperty("OBJECT_URL", "http://fdns-ms-stubbing:3002/object");
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class RulesApplicationTests {
 		
 		for (int i = 0; i < nbOfCalls; i++) {
 			ResponseEntity<JsonNode> response = restTemplate.exchange(
-					baseUrlPath + "{profile}", 
+					baseUrlPath + "profile/{profile}", 
 					HttpMethod.POST, 
 					getEntity(getResourceAsString("junit/rules.json"), MediaType.APPLICATION_JSON),
 					JsonNode.class,
@@ -160,7 +160,7 @@ public class RulesApplicationTests {
 		createAndUpdateRules();
 		
 		ResponseEntity<JsonNode> response = restTemplate.exchange(
-				baseUrlPath + "{profile}", 
+				baseUrlPath + "profile/{profile}", 
 				HttpMethod.GET, 
 				null,
 				JsonNode.class,
@@ -184,5 +184,4 @@ public class RulesApplicationTests {
 		HttpEntity<String> entity = new HttpEntity<String>(content, headers);
 		return entity;
 	}
-
 }
