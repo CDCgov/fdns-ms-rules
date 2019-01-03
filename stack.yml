@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  fluentd:
+    image: fluent/fluentd
+    ports:
+      - "24224:24224"
+  fdns-ms-rules:
+    image: cdcgov/fdns-ms-rules
+    ports:
+      - "8086:8086"
+    depends_on:
+      - fluentd
+    environment:
+      RULES_PORT: 8086
+      RULES_FLUENTD_HOST: fluentd
+      RULES_FLUENTD_PORT: 24224
